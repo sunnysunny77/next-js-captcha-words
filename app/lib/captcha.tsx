@@ -3,13 +3,7 @@ import * as tf from "@tensorflow/tfjs-node";
 import path from "path";
 import {createCanvas} from "canvas";
 
-const labels: string[] = ['MISS', 'THEY', 'THIS', 'WEST', 'ALSO', 'BEEN', 'DAYS', 'EVEN', 'FILM', 'FROM',
-  'GOOD', 'HAVE', 'INTO', 'LAST', 'LIFE', 'LIKE', 'MADE', 'MAKE', 'MANY', 'MORE',
-  'MOST', 'MUCH', 'MUST', 'NEED', 'ONLY', 'OVER', 'PART', 'PLAY', 'SAID', 'SOME',
-  'SUCH', 'TAKE', 'THAN', 'THAT', 'THEM', 'THEY', 'THIS', 'TIME', 'USED', 'WEEK',
-  'WELL', 'WERE', 'WHAT', 'WHEN', 'WILL', 'WITH', 'WORK', 'YEAR', 'YOUR',
-];
-
+const labels: string[] = ['THAT', 'WITH', 'HAVE', 'FROM', 'THIS', 'WILL', 'THEY', 'WERE', 'BEEN', 'MORE', 'SAID', 'THEM', 'THAN', 'INTO', 'MADE', 'ONLY', 'WHEN', 'THIS', 'LAST', 'SOME', 'THEY', 'TIME', 'GOOD', 'ALSO', 'MOST', 'EVEN', 'LIFE', 'WHAT', 'OVER', 'WEST', 'USED', 'SUCH', 'MANY', 'WORK', 'FILM', 'MUST', 'MUCH', 'LIKE', 'YOUR', 'MAKE', 'NEED', 'DOWN', 'TAKE', 'MISS', 'YEAR', 'WELL', 'PART', 'PLAY', 'WEEK', 'DAYS'];
 let currentLabel: string = "";
 
 let model: tf.GraphModel | null = null;
