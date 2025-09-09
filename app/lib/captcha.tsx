@@ -20,7 +20,7 @@ const drawLabel = (label) => {
   const width = 250;
   const height = 100;
   const fill = "white";
-  const dotCount = 248;
+  const dotCount = 250;
   const lineStyle = "rgba(0,0,0,0.34)";
   const lineWidth = 0.5;
   const fontSize = 30;
