@@ -1,7 +1,9 @@
 "use client";
 import * as tf from "@tensorflow/tfjs";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState, useCallback} from "react";
 import {getLabels, getClassify} from "@/lib/captcha";
+import Image from "next/image";
+import Spinner from "@/images/spinner.gif";
 
 const CANVAS_WIDTH = 250;
 const CANVAS_HEIGHT = 125;
@@ -13,19 +15,19 @@ const Captcha = () => {
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const drawingRef = useRef(false);
 
-  const [labels, setLabels] = useState(null);
-  const [message, setMessage] = useState("Loading model");
+  const [label, setLabel] = useState(Spinner.src);
+  const [message, setMessage] = useState("Loading");
   const [disabled, setDisabled] = useState(false);
 
-  const setRandomLabels = async () => {
+  const setRandomLabels = useCallback( async () => {
     try {
-      const labels = await getLabels();
-      setLabels(labels);
+      const res = await getLabels();
+      setLabel(res);
     } catch (err) {
       console.error(err);
       setMessage("Error");
     }
-  };
+  },[]);
 
   const clear = async (text, reset) => {
     if (!ctxRef.current) return;
@@ -93,7 +95,8 @@ const Captcha = () => {
       canvas.addEventListener(evt, onPointerUp)
     );
 
-    clear("Draw the word", true);
+    setRandomLabels();
+    setMessage("Draw the word");
 
     return () => {
       canvas.removeEventListener("pointerdown", onPointerDown);
@@ -102,12 +105,12 @@ const Captcha = () => {
         canvas.removeEventListener(evt, onPointerUp)
       );
     };
-  }, []);
+  }, [setRandomLabels]);
 
   const handleSubmit = async () => {
     try {
       setDisabled(true);
-      setMessage("Checking");
+      setMessage("checking");
 
       let img = tf.browser.fromPixels(canvasRef.current, 1).toFloat().div(255.0);
       img = INVERT ? tf.sub(1.0, img) : img;
@@ -164,7 +167,7 @@ const Captcha = () => {
 
         <div className="label-grid">
 
-          <img src={labels} alt={labels ? "labels" : null}/>
+          <Image width="250" height="100" src={label} unoptimized alt="spinner"/>
 
         </div>
 
