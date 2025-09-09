@@ -149,13 +149,13 @@ const Captcha = () => {
 
       <div className="d-flex flex-wrap justify-content-center mb-4">
 
-        <button className="btn btn-success m-2" onClick={() => clear("Draw the word", true)}>
+        <button className="btn button btn-success m-2" onClick={() => clear("Draw the word", true)}>
           
           Reset
 
         </button>
 
-        <button className="btn btn-success m-2" disabled={disabled} onClick={handleSubmit}>
+        <button className="btn button btn-success m-2" disabled={disabled} onClick={handleSubmit}>
 
           Submit
 

@@ -10,6 +10,7 @@ const labels: string[] = [
   "USED", "SUCH", "MANY", "WORK", "FILM", "MUST", "MUCH", "LIKE", "YOUR", "MAKE",
   "NEED", "DOWN", "TAKE", "MISS", "YEAR", "WELL", "PART", "PLAY", "WEEK", "DAYS"
 ];
+
 let currentLabel: string = "";
 
 let model: tf.GraphModel | null = null;
