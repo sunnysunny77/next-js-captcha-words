@@ -3,7 +3,13 @@ import * as tf from "@tensorflow/tfjs-node";
 import path from "path";
 import {createCanvas} from "canvas";
 
-const labels: string[] = ['THAT', 'WITH', 'HAVE', 'FROM', 'THIS', 'WILL', 'THEY', 'WERE', 'BEEN', 'MORE', 'SAID', 'THEM', 'THAN', 'INTO', 'MADE', 'ONLY', 'WHEN', 'THIS', 'LAST', 'SOME', 'THEY', 'TIME', 'GOOD', 'ALSO', 'MOST', 'EVEN', 'LIFE', 'WHAT', 'OVER', 'WEST', 'USED', 'SUCH', 'MANY', 'WORK', 'FILM', 'MUST', 'MUCH', 'LIKE', 'YOUR', 'MAKE', 'NEED', 'DOWN', 'TAKE', 'MISS', 'YEAR', 'WELL', 'PART', 'PLAY', 'WEEK', 'DAYS'];
+const labels: string[] = [
+  "THAT", "WITH", "HAVE", "FROM", "THIS", "WILL", "THEY", "WERE", "BEEN", "MORE",
+  "SAID", "THEM", "THAN", "INTO", "MADE", "ONLY", "WHEN", "THIS", "LAST", "SOME",
+  "THEY", "TIME", "GOOD", "ALSO", "MOST", "EVEN", "LIFE", "WHAT", "OVER", "WEST",
+  "USED", "SUCH", "MANY", "WORK", "FILM", "MUST", "MUCH", "LIKE", "YOUR", "MAKE",
+  "NEED", "DOWN", "TAKE", "MISS", "YEAR", "WELL", "PART", "PLAY", "WEEK", "DAYS"
+];
 let currentLabel: string = "";
 
 let model: tf.GraphModel | null = null;
