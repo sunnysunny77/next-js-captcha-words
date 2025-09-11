@@ -29,7 +29,7 @@ const Captcha = () => {
     }
   },[]);
 
-  const clear = async (text, reset) => {
+  const clear = async () => {
     if (!ctxRef.current) return;
     if (INVERT) {
       ctxRef.current.fillStyle = "white";
@@ -37,8 +37,6 @@ const Captcha = () => {
     } else {
       ctxRef.current.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
-    if (reset) await setRandomLabels();
-    setMessage(text);
   };
 
   const getCanvasCoords = (
@@ -107,6 +105,17 @@ const Captcha = () => {
     };
   }, [setRandomLabels]);
 
+  const handleClear = async () => {
+    clear();
+    setMessage("Draw a capital letter in the boxes");
+  };
+
+  const handleReset = async () => {
+    await setRandomLabels();
+    clear();
+    setMessage("Draw a capital letter in the boxes");
+  };
+
   const handleSubmit = async () => {
     try {
       setDisabled(true);
@@ -123,8 +132,7 @@ const Captcha = () => {
       const result = await getClassify(tensorData);
       img.dispose();
 
-      clear(result.correct ? "Correct" : "Incorrect", true);
-
+      setMessage(result.correct ? "Correct" : "Incorrect");
     } catch (err) {
       console.error(err);
       setMessage("Error during prediction");
@@ -139,31 +147,23 @@ const Captcha = () => {
 
       <h1 className="text-center mb-2">Handwritten recognition</h1>
 
-      <div id="canvas-wrapper" className="mb-4 text-center">
+      <div id="canvas-wrapper" className="mb-5 text-center">
 
-        <canvas ref={canvasRef} className="border rounded shadow quad"/>
+        <canvas ref={canvasRef} className="rounded shadow quad"/>
 
         <div className="fill"></div>
 
       </div>
 
-      <div className="d-flex flex-wrap justify-content-center mb-4">
+      <div className="d-flex flex-wrap justify-content-center mb-5">
 
-        <button className="btn button btn-success m-2" onClick={() => clear("Draw the word", true)}>
-          
-          Reset
+        <button className="btn btn-success m-2 button" onClick={handleReset}>New</button>
 
-        </button>
-
-        <button className="btn button btn-success m-2" disabled={disabled} onClick={handleSubmit}>
-
-          Submit
-
-        </button>
+        <button className="btn btn-success m-2 button" onClick={handleClear}>Clear</button>
 
       </div>
 
-      <div className="output-container mb-3">
+      <div className="output-container mb-4">
 
         <div className="label-grid">
 
@@ -173,9 +173,19 @@ const Captcha = () => {
 
       </div>
 
-      <div className="text-center alert alert-success p-2 w-100 mb-0" role="alert">
+      <div className="text-center alert alert-success p-2 w-100 mb-4" role="alert">
 
         {message}
+
+      </div>
+
+      <div className="d-flex flex-wrap justify-content-center">
+
+        <button className="btn button btn-success w-100" disabled={disabled} onClick={handleSubmit}>
+
+          Send
+
+        </button>
 
       </div>
 

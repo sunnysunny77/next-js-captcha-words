@@ -105,9 +105,13 @@ const drawLabel = (label) => {
 };
 
 export const getLabels = async () => {
-  currentLabel = labels[Math.floor(Math.random() * labels.length)];
+  try {
+    currentLabel = labels[Math.floor(Math.random() * labels.length)];
 
-  return drawLabel(currentLabel);
+    return drawLabel(currentLabel);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const processImageNode = async (data, shape) => {
@@ -124,15 +128,19 @@ const processImageNode = async (data, shape) => {
 };
 
 export const getClassify = async (tensorData) => {
-  if (!model) await loadModel();
+  try {
+    if (!model) await loadModel();
 
-  if (!currentLabel) {
-    throw new Error("Error: No label available");
+    if (!currentLabel) {
+      throw new Error();
+    }
+
+    const predIndex = await processImageNode(tensorData.data, tensorData.shape);
+
+    return {
+      correct: currentLabel === labels[predIndex],
+    };
+  } catch (err) {
+    console.error(err);
   }
-
-  const predIndex = await processImageNode(tensorData.data, tensorData.shape);
-
-  return {
-    correct: currentLabel === labels[predIndex],
-  };
 };
