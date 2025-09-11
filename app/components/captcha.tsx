@@ -16,8 +16,13 @@ const Captcha = () => {
   const drawingRef = useRef(false);
 
   const [label, setLabel] = useState(Spinner.src);
-  const [message, setMessage] = useState("Loading");
+  const [message, setMessage] = useState(null);
   const [disabled, setDisabled] = useState(false);
+
+    const imageLoader = ({src, width}) => {
+
+    return `${src}?w=${width}`;
+  };
 
   const setRandomLabels = useCallback( async () => {
     try {
@@ -119,7 +124,7 @@ const Captcha = () => {
   const handleSubmit = async () => {
     try {
       setDisabled(true);
-      setMessage("checking");
+      setMessage(null);
 
       let img = tf.browser.fromPixels(canvasRef.current, 1).toFloat().div(255.0);
       img = INVERT ? tf.sub(1.0, img) : img;
@@ -167,15 +172,15 @@ const Captcha = () => {
 
         <div className="label-grid">
 
-          <Image width="250" height="100" src={label} unoptimized alt="spinner"/>
+          <Image width="250" height="100" src={label} loader={imageLoader} unoptimized alt="spinner"/>
 
         </div>
 
       </div>
 
-      <div className="text-center alert alert-success p-2 w-100 mb-4" role="alert">
+      <div className="text-center alert alert-success w-100 d-flex justify-content-center align-items-center p-0 mb-4" role="alert">
 
-        {message}
+        {message ? message : <Image width="30" height="30" src={Spinner} loader={imageLoader} unoptimized alt="spinner"/>}
 
       </div>
 
