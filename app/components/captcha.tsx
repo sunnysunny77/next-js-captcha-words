@@ -19,7 +19,7 @@ const Captcha = () => {
   const [message, setMessage] = useState(null);
   const [disabled, setDisabled] = useState(false);
 
-    const imageLoader = ({src, width}) => {
+  const imageLoader = ({src, width}) => {
 
     return `${src}?w=${width}`;
   };
