@@ -2,6 +2,8 @@
 import * as tf from "@tensorflow/tfjs-node";
 import path from "path";
 import {createCanvas} from "canvas";
+import {cookies} from "next/headers";
+import crypto from "crypto";
 
 const labels: string[] = [
   "THAT", "WITH", "THIS", "THEY", "FROM", "HAVE", "WILL", "WERE", "BEEN", "MORE",
@@ -15,8 +17,6 @@ const labels: string[] = [
   "SAYS", "REAL", "MIND", "LOVE", "GIVE", "LIVE", "EVER", "FACE", "ROOM", "BOOK",
   "FIVE", "HALF", "BEST", "EAST", "PLAN", "EASY", "FIND", "FREE", "REST"
 ];
-
-let currentLabel: string = "";
 
 let model: tf.GraphModel | null = null;
 
@@ -106,7 +106,11 @@ const drawLabel = (label) => {
 
 export const getLabels = async () => {
   try {
-    currentLabel = labels[Math.floor(Math.random() * labels.length)];
+    const currentLabel = labels[Math.floor(Math.random() * labels.length)];
+    const secret = process.env.REACT_APP_AUTH_SECRET;
+    const hash = crypto.createHmac("sha256", secret).update(currentLabel).digest("hex");
+    const cookieStore = await cookies();
+    cookieStore.set("App-Captcha", hash, {secure: true, httpOnly: true, sameSite: "strict"});
 
     return drawLabel(currentLabel);
   } catch (err) {
@@ -131,14 +135,18 @@ export const getClassify = async (tensorData) => {
   try {
     if (!model) await loadModel();
 
-    if (!currentLabel) {
-      throw new Error();
-    }
-
     const predIndex = await processImageNode(tensorData.data, tensorData.shape);
+    const cookieStore = await cookies();
+    const storedHash = cookieStore.get("App-Captcha").value;
+    const secret = process.env.REACT_APP_AUTH_SECRET;
+    const incomingHash = crypto.createHmac("sha256", secret).update(String(labels[predIndex])).digest("hex");
+    const match = crypto.timingSafeEqual(
+      Buffer.from(incomingHash, "hex"),
+      Buffer.from(storedHash, "hex")
+    );
 
     return {
-      correct: currentLabel === labels[predIndex],
+      correct: match,
     };
   } catch (err) {
     console.error(err);

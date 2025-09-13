@@ -170,7 +170,7 @@ const Captcha = () => {
 
       <div className="output-container mb-4">
 
-        <div className="label-grid">
+        <div className="label-grid d-flex justify-content-center align-items-center">
 
           <Image width="250" height="100" src={label} loader={imageLoader} unoptimized alt="spinner"/>
 
