@@ -98,6 +98,12 @@ const Captcha = () => {
       canvas.addEventListener(evt, onPointerUp)
     );
 
+    if (INVERT) {
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    } else {
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
     setRandomLabels();
     setMessage("Draw the word");
 
