@@ -5,8 +5,8 @@ import {getLabels, getClassify} from "@/lib/captcha";
 import Image from "next/image";
 import Spinner from "@/images/spinner.gif";
 
-const CANVAS_WIDTH = 250;
-const CANVAS_HEIGHT = 125;
+const CANVAS_WIDTH = 280;
+const CANVAS_HEIGHT = 140;
 
 const INVERT = false;
 
@@ -194,9 +194,9 @@ const Captcha = () => {
 
     <div className="hr-container d-flex flex-column" id="container">
 
-      <h1 className="text-center mb-2">Handwritten recognition</h1>
+      <h1 className="text-center mb-4">Handwritten recognition</h1>
 
-      <div id="canvas-wrapper" className="mb-5 text-center">
+      <div id="canvas-wrapper" className="mb-5 d-flex">
 
         <canvas ref={canvasRef} className="rounded shadow quad"/>
 
@@ -206,9 +206,9 @@ const Captcha = () => {
 
       <div className="d-flex flex-wrap justify-content-center mb-5">
 
-        <button className="btn btn-success m-2 button" onClick={handleReset}>New</button>
+        <button className="btn btn-success mx-2 p-1 button" onClick={handleReset}>New</button>
 
-        <button className="btn btn-success m-2 button" onClick={handleClear}>Clear</button>
+        <button className="btn btn-success mx-2 p-1 button" onClick={handleClear}>Clear</button>
 
       </div>
 
@@ -216,7 +216,7 @@ const Captcha = () => {
 
         <div className="label-grid d-flex justify-content-center align-items-center">
 
-          <Image width="250" height="100" src={label} loader={imageLoader} unoptimized alt="spinner"/>
+          <Image width="280" height="112" src={label} loader={imageLoader} unoptimized alt="spinner"/>
 
         </div>
 
@@ -230,7 +230,7 @@ const Captcha = () => {
 
       <div className="d-flex flex-wrap justify-content-center">
 
-        <button className="btn button btn-success w-100" disabled={disabled} onClick={handleSubmit}>
+        <button className="btn button btn-success w-100 p-1" disabled={disabled} onClick={handleSubmit}>
 
           Send
 
