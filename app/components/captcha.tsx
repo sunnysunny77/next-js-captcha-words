@@ -149,7 +149,7 @@ const Captcha = () => {
     invertedCanvas.width = CANVAS_WIDTH;
     invertedCanvas.height = CANVAS_HEIGHT;
     const invertedCtx = invertedCanvas.getContext("2d");
-    
+
     const invertedData = ctx.createImageData(image.width, image.height);
 
     for (let i = 0; i < image.data.length; i += 4) {
