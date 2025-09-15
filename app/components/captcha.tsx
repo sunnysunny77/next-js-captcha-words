@@ -1,5 +1,6 @@
 "use client";
 import * as tf from "@tensorflow/tfjs";
+import {ArrowRight} from "react-bootstrap-icons";
 import {useEffect, useRef, useState, useCallback} from "react";
 import {getLabels, getClassify} from "@/lib/captcha";
 import Image from "next/image";
@@ -15,7 +16,7 @@ const Captcha = () => {
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const drawingRef = useRef(false);
 
-  const [label, setLabel] = useState(Spinner.src);
+  const [label, setLabel] = useState("");
   const [message, setMessage] = useState(null);
   const [disabled, setDisabled] = useState(false);
 
@@ -118,13 +119,13 @@ const Captcha = () => {
 
   const handleClear = async () => {
     clear();
-    setMessage("Draw a capital letter in the boxes");
+    setMessage("Draw the word");
   };
 
   const handleReset = async () => {
     await setRandomLabels();
     clear();
-    setMessage("Draw a capital letter in the boxes");
+    setMessage("Draw the word");
   };
 
   const resizeCanvas = (canvas) => {
@@ -204,11 +205,19 @@ const Captcha = () => {
 
       </div>
 
-      <div className="d-flex flex-wrap justify-content-evenly mb-5">
+      <div className="row justify-content-evenly mb-5 g-0">
 
-        <button className="btn button button-small btn-light mx-2 my-1 p-1 button" onClick={handleReset}>New</button>
+        <div className="col-32 col-sm-12 d-flex justify-content-center">
 
-        <button className="btn button button-small btn-light mx-2 my-1 p-1 button" onClick={handleClear}>Clear</button>
+          <button className="btn button button-small btn-light w-100 my-1 p-1 button" onClick={handleReset}>New</button>
+
+        </div>
+
+        <div className="col-32 col-sm-12 d-flex justify-content-center">
+
+          <button className="btn button button-small btn-light w-100 my-1 p-1 button" onClick={handleClear}>Clear</button>
+
+        </div>
 
       </div>
 
@@ -216,7 +225,7 @@ const Captcha = () => {
 
         <div className="label-grid d-flex justify-content-center align-items-center">
 
-          <Image width="280" height="112" src={label} loader={imageLoader} unoptimized alt="spinner"/>
+          {label ? <Image width="280" height="112" src={label} loader={imageLoader} unoptimized alt="spinner"/>  : <Image width="30" height="30" src={Spinner} loader={imageLoader} unoptimized alt="spinner"/>}
 
         </div>
 
@@ -230,9 +239,15 @@ const Captcha = () => {
 
       <div className="d-flex flex-wrap justify-content-center">
 
-        <button className="btn button btn-light btn-success w-100 p-1" disabled={disabled} onClick={handleSubmit}>
+        <button className="btn button btn-light button-large w-100 d-flex flex-warp align-items-center justify-content-center p-1" disabled={disabled} onClick={handleSubmit}>
 
           Send
+
+          <span className="d-flex flex-warp align-items-center justify-content-center ms-2">
+
+            <ArrowRight />
+
+          </span>
 
         </button>
 
