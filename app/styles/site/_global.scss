@@ -86,6 +86,7 @@ h1 {
     width: 100%;
     border-radius: 5px;
     object-fit: contain;
+    opacity: 0.9;
   }
 }
 
@@ -120,4 +121,5 @@ h1 {
 
 .spinner {
   object-fit: contain;
+  opacity: 1;
 }
