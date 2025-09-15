@@ -225,7 +225,7 @@ const Captcha = () => {
 
         <div className="label-grid d-flex justify-content-center align-items-center">
 
-          {label ? <Image width="280" height="112" src={label} loader={imageLoader} unoptimized alt="spinner"/>  : <Image width="30" height="30" src={Spinner} loader={imageLoader} unoptimized alt="spinner"/>}
+          {label ? <Image width="280" height="112" src={label} loader={imageLoader} unoptimized alt="spinner"/>  : <Image width="35" height="35" src={Spinner} loader={imageLoader} unoptimized alt="spinner"/>}
 
         </div>
 
@@ -233,7 +233,7 @@ const Captcha = () => {
 
       <div className="text-center alert w-100 d-flex justify-content-center align-items-center p-0 mb-4" role="alert">
 
-        {message ? message : <Image width="30" height="30" src={Spinner} loader={imageLoader} unoptimized alt="spinner"/>}
+        {message ? message : <Image width="35" height="35" src={Spinner} loader={imageLoader} unoptimized alt="spinner"/>}
 
       </div>
 
