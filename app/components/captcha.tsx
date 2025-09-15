@@ -194,7 +194,7 @@ const Captcha = () => {
 
     <div className="hr-container d-flex flex-column" id="container">
 
-      <h1 className="text-center mb-4">Handwritten recognition</h1>
+      <h1 className="text-center mb-4">Hand drawn recognition</h1>
 
       <div id="canvas-wrapper" className="mb-5 d-flex">
 
@@ -204,11 +204,11 @@ const Captcha = () => {
 
       </div>
 
-      <div className="d-flex flex-wrap justify-content-center mb-5">
+      <div className="d-flex flex-wrap justify-content-evenly mb-5">
 
-        <button className="btn btn-success mx-2 my-1 p-1 button" onClick={handleReset}>New</button>
+        <button className="btn button button-small btn-light mx-2 my-1 p-1 button" onClick={handleReset}>New</button>
 
-        <button className="btn btn-success mx-2 my-1 p-1 button" onClick={handleClear}>Clear</button>
+        <button className="btn button button-small btn-light mx-2 my-1 p-1 button" onClick={handleClear}>Clear</button>
 
       </div>
 
@@ -222,7 +222,7 @@ const Captcha = () => {
 
       </div>
 
-      <div className="text-center alert alert-success w-100 d-flex justify-content-center align-items-center p-0 mb-4" role="alert">
+      <div className="text-center alert w-100 d-flex justify-content-center align-items-center p-0 mb-4" role="alert">
 
         {message ? message : <Image width="30" height="30" src={Spinner} loader={imageLoader} unoptimized alt="spinner"/>}
 
@@ -230,7 +230,7 @@ const Captcha = () => {
 
       <div className="d-flex flex-wrap justify-content-center">
 
-        <button className="btn button btn-success w-100 p-1" disabled={disabled} onClick={handleSubmit}>
+        <button className="btn button btn-light btn-success w-100 p-1" disabled={disabled} onClick={handleSubmit}>
 
           Send
 
