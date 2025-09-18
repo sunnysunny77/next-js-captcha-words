@@ -195,9 +195,9 @@ const Captcha = () => {
 
     <div className="hr-container d-flex flex-column" id="container">
 
-      <h1 className="text-center mb-4">Hand drawn recognition</h1>
+      <h1 className="text-center mb-3 mb-sm-4">Hand drawn recognition</h1>
 
-      <div id="canvas-wrapper" className="mb-5 d-flex">
+      <div id="canvas-wrapper" className="mb-3 mb-sm-5 d-flex">
 
         <canvas ref={canvasRef} className="rounded shadow quad"/>
 
@@ -205,7 +205,7 @@ const Captcha = () => {
 
       </div>
 
-      <div className="row justify-content-evenly mb-5 g-0">
+      <div className="row justify-content-evenly mb-3 mb-sm-5 g-0">
 
         <div className="col-32 col-sm-12 d-flex justify-content-center">
 
