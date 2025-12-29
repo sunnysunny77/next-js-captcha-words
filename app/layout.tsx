@@ -6,6 +6,7 @@ import "@/styles/app.scss";
 
 const poppins = localFont({
   display: "swap",
+  style: "normal",
   variable: "--font-poppins",
   src: [
     {
